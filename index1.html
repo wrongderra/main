@@ -69,6 +69,30 @@
 	<h1>作者のblog：</h1>
 	<p>24.10.19：今日高产，芝士自制4K音游！<img border="0" src="\main\1729349040903.png" width="320" height="240"></p>
 	<p>24.10.19：狂喜，网站终于成辣！</p>
+
+	<h1>网页评论区</h1>
+    <form>
+        <div>
+            <label for="name">ID：</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">邮箱：</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="content">评论内容：</label>
+            <textarea id="content" name="content" rows="4" required></textarea>
+        </div>
+        <div>
+            <input type="submit" value="提交评论">
+        </div>
+    </form>
+
+    <h2>评论列表</h2>
+    <ul id="comments">
+        <!-- 评论将会在这里显示 -->
+    </ul>
 	
 </body>
 </html>
