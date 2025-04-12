@@ -15,8 +15,13 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       API_TOKEN: ${{ secrets.API_TOKEN }}
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'  # 允许清理缓存
 
     steps:
+    - name: Clean Cache
+      run: |
+        rm -rf node_modules
+        npm cache clean --force
     - name: Checkout Repository
       uses: actions/checkout@v4
 
