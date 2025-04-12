@@ -3,7 +3,6 @@ name: Secure Blog Deployment
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
   deploy:
@@ -30,10 +29,11 @@ jobs:
     - name: Setup Pages
       uses: actions/configure-pages@v3
 
-    - name: Upload Pages Artifact
-      uses: actions/upload-pages-artifact@v2  # 改用官方推荐的Pages专用Action
+    - name: Upload Artifact
+      uses: actions/upload-pages-artifact@v2
       with:
-        path: .
+        path: "public"  # 关键修改点：明确指定路径
+        retention-days: 1
 
     - name: Deploy to GitHub Pages
       uses: actions/deploy-pages@v2
