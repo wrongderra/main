@@ -1,0 +1,40 @@
+name: Secure Blog Deployment
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      API_TOKEN: ${{ secrets.API_TOKEN }}
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Inject API Token
+      run: |
+        sed -i "s/{{API_TOKEN}}/$API_TOKEN/g" *.html
+        sed -i "s/YOUR_GITHUB_USERNAME/${{ github.repository_owner }}/g" *.html
+        sed -i "s/YOUR_REPOSITORY_NAME/${{ github.event.repository.name }}/g" *.html
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: .
+
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v2
+      id: deployment
