@@ -15,13 +15,14 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       API_TOKEN: ${{ secrets.API_TOKEN }}
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'  # 允许清理缓存
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
     steps:
     - name: Clean Cache
       run: |
         rm -rf node_modules
         npm cache clean --force
+
     - name: Checkout Repository
       uses: actions/checkout@v4
 
@@ -37,7 +38,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v2
       with:
-        path: "public"  # 关键修改点：明确指定路径
+        path: "public"
         retention-days: 1
 
     - name: Deploy to GitHub Pages
